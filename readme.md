@@ -1,5 +1,7 @@
 # Cleanlang
 
+![Clean lang logo. The "l" is a "lambda"](/assets/clean.png)
+
 ## A clean compile to JavaScript language
 
 ### Install
