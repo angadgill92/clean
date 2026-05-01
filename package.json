@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "c8 node --test test/*.test.mjs",
+    "lint": "eslint lib",
     "postinstall": "node -e \"console.log('\\x1b[33m%s\\x1b[0m', 'Please ensure you are using the Node version specified in .nvmrc by running: nvm use')\""
   },
   "engines": {
@@ -20,7 +21,8 @@
     "escodegen": "^2.1.0"
   },
   "devDependencies": {
-    "c8": "^10.0.0"
+    "c8": "^10.0.0",
+    "eslint": "^9.39.4"
   },
   "repository": {
     "type": "git",

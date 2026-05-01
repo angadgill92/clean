@@ -37,7 +37,7 @@ const readFileContent = file => fs.readFileSync(file, 'utf8')
 describe('sourceFiles', () => {
   const searchAndTest = (tests, assert_) => {
     if (fs.existsSync(tests)) {
-      fs.readdirSync(tests).forEach(function (file, index) {
+      fs.readdirSync(tests).forEach(function (file, _index) {
         const curPath = path.join(tests, '/', file)
         const pathParse = path.parse(curPath)
         if (fs.lstatSync(curPath).isDirectory()) {
