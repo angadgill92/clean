@@ -1,4 +1,6 @@
-const test = require('ava')
+import test from 'ava';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 /* lib files */
 const base = require('../lib/basicParsers')
@@ -20,7 +22,7 @@ const basicTest = () => {
         let op = valid[input]
         let value = base[parser](initObj(input))
         let expected = output(op.str, op.line, op.column)
-        test(parser, t => {
+        test(`${parser} - ${input}`, t => {
           t.deepEqual(value, expected)
         })
       }
@@ -40,7 +42,7 @@ const basicTest = () => {
         if (Array.isArray(output)) {
           expected = templ[inpTempl](...output)
         }
-        test(parser, t => {
+        test(`${parser} - ${input}`, t => {
           t.deepEqual(value, expected)
         })
       }

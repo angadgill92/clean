@@ -1,6 +1,11 @@
+import test from 'ava';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+const require = createRequire(import.meta.url);
 const fs = require('fs')
 const path = require('path')
-const test = require('ava')
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* lib files */
 const base = require('../lib/basicParsers')

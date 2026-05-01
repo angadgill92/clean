@@ -1,4 +1,6 @@
-const test = require('ava')
+import test from 'ava';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 /* lib files */
 const parsers = require('../lib/parser')
@@ -48,7 +50,7 @@ testRunner(ifExprParser(ifPass)[0], ifTest, 'ifExprParser')
 const declPass = initObj('a = 25')
 const declTest = decl(id('a'), num('25'))
 testRunner(declParser(declPass)[0], declTest, 'declParser')
-testRunner(declParser(ifPass), null, 'declParser')
+testRunner(declParser(ifPass), null, 'declParser - invalid input')
 
 const fnDeclPass = initObj('fact n = n * 25')
 const fnDeclTest = funcDecl(id('fact'), [id('n')], binEx(id('n'), '*', num('25')))
