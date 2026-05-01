@@ -1,4 +1,5 @@
-import test from 'ava';
+import { describe, test } from 'node:test';
+import assert from 'node:assert/strict';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
@@ -14,7 +15,7 @@ const initObj = (input, line = 1, column = 0) => ({str: input, line, column})
 
 const output = (input, line, column) => [input, initObj('', line, column)]
 
-const basicTest = () => {
+describe('basicParsers', () => {
   for (let parser in base) {
     let valid = assertion.basic[parser]
     if (utils.notUndefined(valid)) {
@@ -22,8 +23,8 @@ const basicTest = () => {
         let op = valid[input]
         let value = base[parser](initObj(input))
         let expected = output(op.str, op.line, op.column)
-        test(`${parser} - ${input}`, t => {
-          t.deepEqual(value, expected)
+        test(`${parser} - ${input}`, () => {
+          assert.deepStrictEqual(value, expected)
         })
       }
     }
@@ -42,12 +43,10 @@ const basicTest = () => {
         if (Array.isArray(output)) {
           expected = templ[inpTempl](...output)
         }
-        test(`${parser} - ${input}`, t => {
-          t.deepEqual(value, expected)
+        test(`${parser} - ${input}`, () => {
+          assert.deepStrictEqual(value, expected)
         })
       }
     }
   }
-}
-
-basicTest()
+})

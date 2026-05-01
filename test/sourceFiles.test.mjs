@@ -1,4 +1,5 @@
-import test from 'ava';
+import { describe, test } from 'node:test';
+import assert from 'node:assert/strict';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 const require = createRequire(import.meta.url);
@@ -33,23 +34,25 @@ const generateTree = input => {
 
 const readFileContent = file => fs.readFileSync(file, 'utf8')
 
-const searchAndTest = (tests, assert) => {
-  if (fs.existsSync(tests)) {
-    fs.readdirSync(tests).forEach(function (file, index) {
-      const curPath = path.join(tests, '/', file)
-      const pathParse = path.parse(curPath)
-      if (fs.lstatSync(curPath).isDirectory()) {
-        searchAndTest(curPath, path.join(assert, '/', file))
-      } else if (pathParse.ext === '.cl') {
-        const input = initObj(readFileContent(path.join(pathParse.dir, `${pathParse.name}.cl`)))
-        const assertJson = path.join(assert, `${pathParse.name}.json`)
-        const jsonValue = require(assertJson)
-        const tree = generateTree(input)
-        test(file, t => {
-          t.deepEqual(tree, jsonValue)
-        })
-      }
-    })
+describe('sourceFiles', () => {
+  const searchAndTest = (tests, assert_) => {
+    if (fs.existsSync(tests)) {
+      fs.readdirSync(tests).forEach(function (file, index) {
+        const curPath = path.join(tests, '/', file)
+        const pathParse = path.parse(curPath)
+        if (fs.lstatSync(curPath).isDirectory()) {
+          searchAndTest(curPath, path.join(assert_, '/', file))
+        } else if (pathParse.ext === '.cl') {
+          const input = initObj(readFileContent(path.join(pathParse.dir, `${pathParse.name}.cl`)))
+          const assertJson = path.join(assert_, `${pathParse.name}.json`)
+          const jsonValue = require(assertJson)
+          const tree = generateTree(input)
+          test(file, () => {
+            assert.deepStrictEqual(tree, jsonValue)
+          })
+        }
+      })
+    }
   }
-}
-searchAndTest(srcFiles, assertFiles)
+  searchAndTest(srcFiles, assertFiles)
+})
