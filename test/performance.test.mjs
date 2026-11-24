@@ -39,3 +39,11 @@ describe('parse time grows linearly with file size', () => {
     assertParsesWithin(src, 500)
   })
 })
+
+describe('long input does not overflow the stack', () => {
+  // Before the fix these threw "RangeError: Maximum call stack size exceeded".
+  test('5,000 operands in one expression', () => {
+    const src = 'a = ' + Array.from({ length: 5000 }, (_, i) => String(i)).join(' + ') + '\n'
+    assertParsesWithin(src, 5000)
+  })
+})

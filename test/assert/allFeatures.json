@@ -163,34 +163,34 @@
           },
           "init": {
             "type": "BinaryExpression",
-            "operator": "/",
+            "operator": "+",
             "sType": "number",
             "left": {
               "type": "BinaryExpression",
-              "operator": "*",
-              "sType": "number",
-              "left": {
-                "type": "Literal",
-                "value": 4,
-                "raw": "4",
-                "sType": "number"
-              },
-              "right": {
-                "type": "Literal",
-                "value": 3,
-                "raw": "3",
-                "sType": "number"
-              }
-            },
-            "right": {
-              "type": "BinaryExpression",
-              "operator": "+",
+              "operator": "-",
               "sType": "number",
               "left": {
                 "type": "BinaryExpression",
-                "operator": "-",
+                "operator": "/",
                 "sType": "number",
                 "left": {
+                  "type": "BinaryExpression",
+                  "operator": "*",
+                  "sType": "number",
+                  "left": {
+                    "type": "Literal",
+                    "value": 4,
+                    "raw": "4",
+                    "sType": "number"
+                  },
+                  "right": {
+                    "type": "Literal",
+                    "value": 3,
+                    "raw": "3",
+                    "sType": "number"
+                  }
+                },
+                "right": {
                   "type": "BinaryExpression",
                   "operator": "**",
                   "sType": "number",
@@ -206,30 +206,30 @@
                     "raw": "9",
                     "sType": "number"
                   }
-                },
-                "right": {
-                  "type": "Literal",
-                  "value": 15,
-                  "raw": "15",
-                  "sType": "number"
                 }
               },
               "right": {
-                "type": "BinaryExpression",
-                "operator": "*",
-                "sType": "number",
-                "left": {
-                  "type": "Literal",
-                  "value": 75,
-                  "raw": "75",
-                  "sType": "number"
-                },
-                "right": {
-                  "type": "Literal",
-                  "value": 9,
-                  "raw": "9",
-                  "sType": "number"
-                }
+                "type": "Literal",
+                "value": 15,
+                "raw": "15",
+                "sType": "number"
+              }
+            },
+            "right": {
+              "type": "BinaryExpression",
+              "operator": "*",
+              "sType": "number",
+              "left": {
+                "type": "Literal",
+                "value": 75,
+                "raw": "75",
+                "sType": "number"
+              },
+              "right": {
+                "type": "Literal",
+                "value": 9,
+                "raw": "9",
+                "sType": "number"
               }
             }
           }
@@ -332,45 +332,45 @@
           },
           "init": {
             "type": "BinaryExpression",
-            "operator": "+",
+            "operator": "-",
             "sType": "number",
             "left": {
               "type": "BinaryExpression",
-              "operator": "**",
+              "operator": "+",
               "sType": "number",
               "left": {
-                "type": "CallExpression",
-                "callee": {
-                  "type": "Identifier",
-                  "name": "sum"
-                },
-                "arguments": [
-                  {
-                    "type": "Literal",
-                    "value": 4,
-                    "raw": "4",
-                    "sType": "number"
+                "type": "BinaryExpression",
+                "operator": "**",
+                "sType": "number",
+                "left": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "sum"
                   },
-                  {
-                    "type": "Literal",
-                    "value": 5,
-                    "raw": "5",
-                    "sType": "number"
-                  }
-                ]
+                  "arguments": [
+                    {
+                      "type": "Literal",
+                      "value": 4,
+                      "raw": "4",
+                      "sType": "number"
+                    },
+                    {
+                      "type": "Literal",
+                      "value": 5,
+                      "raw": "5",
+                      "sType": "number"
+                    }
+                  ]
+                },
+                "right": {
+                  "type": "Literal",
+                  "value": 1,
+                  "raw": "1",
+                  "sType": "number"
+                }
               },
               "right": {
-                "type": "Literal",
-                "value": 1,
-                "raw": "1",
-                "sType": "number"
-              }
-            },
-            "right": {
-              "type": "BinaryExpression",
-              "operator": "-",
-              "sType": "number",
-              "left": {
                 "type": "BinaryExpression",
                 "operator": "/",
                 "sType": "number",
@@ -406,43 +406,43 @@
                     "name": "a"
                   }
                 }
-              },
-              "right": {
-                "type": "CallExpression",
-                "callee": {
-                  "type": "Identifier",
-                  "name": "product"
-                },
-                "arguments": [
-                  {
-                    "type": "Literal",
-                    "value": 2,
-                    "raw": "2",
-                    "sType": "number"
-                  },
-                  {
-                    "type": "CallExpression",
-                    "callee": {
-                      "type": "Identifier",
-                      "name": "sum"
-                    },
-                    "arguments": [
-                      {
-                        "type": "Literal",
-                        "value": 1,
-                        "raw": "1",
-                        "sType": "number"
-                      },
-                      {
-                        "type": "Literal",
-                        "value": 2,
-                        "raw": "2",
-                        "sType": "number"
-                      }
-                    ]
-                  }
-                ]
               }
+            },
+            "right": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "product"
+              },
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "value": 2,
+                  "raw": "2",
+                  "sType": "number"
+                },
+                {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "Identifier",
+                    "name": "sum"
+                  },
+                  "arguments": [
+                    {
+                      "type": "Literal",
+                      "value": 1,
+                      "raw": "1",
+                      "sType": "number"
+                    },
+                    {
+                      "type": "Literal",
+                      "value": 2,
+                      "raw": "2",
+                      "sType": "number"
+                    }
+                  ]
+                }
+              ]
             }
           }
         }

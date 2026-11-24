@@ -682,18 +682,18 @@
             "operator": "*",
             "sType": "number",
             "left": {
-              "type": "Identifier",
-              "name": "subNum"
-            },
-            "right": {
               "type": "BinaryExpression",
-              "operator": "*",
+              "operator": "/",
               "sType": "number",
               "left": {
                 "type": "BinaryExpression",
-                "operator": "/",
+                "operator": "*",
                 "sType": "number",
                 "left": {
+                  "type": "Identifier",
+                  "name": "subNum"
+                },
+                "right": {
                   "type": "BinaryExpression",
                   "operator": "**",
                   "sType": "number",
@@ -705,26 +705,26 @@
                     "type": "Identifier",
                     "name": "divDec"
                   }
-                },
-                "right": {
-                  "type": "Identifier",
-                  "name": "expDec"
                 }
               },
               "right": {
-                "type": "BinaryExpression",
-                "operator": "**",
-                "sType": "number",
-                "left": {
-                  "type": "Identifier",
-                  "name": "expDec2"
-                },
-                "right": {
-                  "type": "Literal",
-                  "value": 3,
-                  "raw": "3",
-                  "sType": "number"
-                }
+                "type": "Identifier",
+                "name": "expDec"
+              }
+            },
+            "right": {
+              "type": "BinaryExpression",
+              "operator": "**",
+              "sType": "number",
+              "left": {
+                "type": "Identifier",
+                "name": "expDec2"
+              },
+              "right": {
+                "type": "Literal",
+                "value": 3,
+                "raw": "3",
+                "sType": "number"
               }
             }
           }
@@ -773,28 +773,28 @@
           },
           "init": {
             "type": "BinaryExpression",
-            "operator": "+",
+            "operator": "-",
             "sType": "number",
             "left": {
-              "type": "UnaryExpression",
-              "operator": "-",
-              "argument": {
-                "type": "Literal",
-                "value": 111,
-                "raw": "111",
-                "sType": "number"
-              },
-              "prefix": true
-            },
-            "right": {
               "type": "BinaryExpression",
-              "operator": "-",
+              "operator": "+",
               "sType": "number",
               "left": {
                 "type": "BinaryExpression",
                 "operator": "+",
                 "sType": "number",
                 "left": {
+                  "type": "UnaryExpression",
+                  "operator": "-",
+                  "argument": {
+                    "type": "Literal",
+                    "value": 111,
+                    "raw": "111",
+                    "sType": "number"
+                  },
+                  "prefix": true
+                },
+                "right": {
                   "type": "BinaryExpression",
                   "operator": "*",
                   "sType": "number",
@@ -821,20 +821,20 @@
                     "raw": "8",
                     "sType": "number"
                   }
-                },
-                "right": {
-                  "type": "Literal",
-                  "value": 34,
-                  "raw": "34",
-                  "sType": "number"
                 }
               },
               "right": {
                 "type": "Literal",
-                "value": 23,
-                "raw": "23",
+                "value": 34,
+                "raw": "34",
                 "sType": "number"
               }
+            },
+            "right": {
+              "type": "Literal",
+              "value": 23,
+              "raw": "23",
+              "sType": "number"
             }
           }
         }
