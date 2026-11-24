@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { spawn, execSync } from 'node:child_process'
+import { spawn, spawnSync, execSync } from 'node:child_process'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -143,4 +143,41 @@ test('CLI: -t flag (disable type inference)', async () => {
   
   await fs.rm(tempFile).catch(() => {})
   await fs.rm(expectedOutFile).catch(() => {})
+})
+
+// Bug: errors exited with status 0, so scripts and CI could not tell a
+// failed compile from a successful one.
+const exitStatusFor = async (name, source) => {
+  const tempFile = path.resolve(__dirname, name)
+  const outFile = tempFile.replace(/\.cl$/, '.js')
+  await fs.writeFile(tempFile, source)
+  try {
+    return spawnSync('node', [binPath, tempFile, '-o', outFile], { encoding: 'utf8' })
+  } finally {
+    await fs.rm(tempFile).catch(() => {})
+    await fs.rm(outFile).catch(() => {})
+  }
+}
+
+test('CLI: syntax error exits with status 1', async () => {
+  const result = await exitStatusFor('temp_syntax_err.cl', 'a = 1 +\n')
+  assert.equal(result.status, 1)
+  assert.match(result.stdout, /Missing operand/)
+})
+
+test('CLI: type error exits with status 1', async () => {
+  const result = await exitStatusFor('temp_type_err.cl', "a = 1 + 'a'\n")
+  assert.equal(result.status, 1)
+  assert.match(result.stdout, /"error":true/)
+})
+
+test('CLI: missing input file exits with status 1', () => {
+  const result = spawnSync('node', [binPath, path.resolve(__dirname, 'does_not_exist.cl')], { encoding: 'utf8' })
+  assert.equal(result.status, 1)
+  assert.match(result.stdout, /does not exist/)
+})
+
+test('CLI: successful compile exits with status 0', async () => {
+  const result = await exitStatusFor('temp_ok.cl', 'a = 1 + 2\n')
+  assert.equal(result.status, 0)
 })
