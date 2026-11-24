@@ -39,3 +39,22 @@ describe('binary operator precedence and associativity', () => {
     test(expr, () => assert.equal(evalClean(expr), expected))
   }
 })
+
+describe('bitwise and shift operators', () => {
+  // Bug: the operator regex accepted <<, >>, >>>, & and |, but they had no
+  // precedence entry, so the parser crashed with a TypeError.
+  const cases = [
+    ['1 << 2', 1 << 2],
+    ['256 >> 2', 256 >> 2],
+    ['-16 >>> 28', -16 >>> 28],
+    ['6 & 3', 6 & 3],
+    ['6 | 3', 6 | 3],
+    ['1 + 1 << 2', 1 + 1 << 2],
+    ['1 << 2 < 5', 1 << 2 < 5],
+    ['12 & 10 | 1', 12 & 10 | 1],
+    ['4 | 1 == 5', 4 | 1 === 5]
+  ]
+  for (const [expr, expected] of cases) {
+    test(expr, () => assert.equal(evalClean(expr), expected))
+  }
+})
