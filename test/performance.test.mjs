@@ -40,6 +40,26 @@ describe('parse time grows linearly with file size', () => {
   })
 })
 
+describe('nested expressions do not backtrack exponentially', () => {
+  // Before the fix each nesting level re-parsed its contents several
+  // times: parentheses 10 deep took about 13 s, arrays 8 deep about 17 s.
+  test('parentheses nested 10 deep', () => {
+    const tree = assertParsesWithin(`a = ${'('.repeat(10)}1${')'.repeat(10)}\n`, 500)
+    assert.equal(tree.body[0].declarations[0].init.value, 1)
+  })
+
+  test('arrays nested 8 deep', () => {
+    const tree = assertParsesWithin(`a = ${'['.repeat(8)}1${']'.repeat(8)}\n`, 500)
+    let node = tree.body[0].declarations[0].init
+    for (let i = 0; i < 8; i++) node = node.elements[0]
+    assert.equal(node.value, 1)
+  })
+
+  test('function calls nested 12 deep', () => {
+    assertParsesWithin(`a = f ${'(g '.repeat(12)}1${')'.repeat(12)}\n`, 500)
+  })
+})
+
 describe('long input does not overflow the stack', () => {
   // Before the fix these threw "RangeError: Maximum call stack size exceeded".
   test('5,000 operands in one expression', () => {
